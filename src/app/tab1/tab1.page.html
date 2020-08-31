@@ -1,0 +1,34 @@
+<ion-header [translucent]="true" >
+  <ion-toolbar color="dark">
+    <ion-title>
+      Pendientes
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true"        
+              color="dark">
+  <ion-header collapse="condense" class="ion-no-border">
+    <ion-toolbar color="dark">
+      <ion-title size="large">Pendientes</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-list color="dark">
+    <ion-item *ngFor= "let lista of bolosService.listas"
+               detail
+               color="dark">
+      <ion-label>{{lista.titulo}}</ion-label>
+    </ion-item> 
+   
+  </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="tertiary"
+                     (click)="agregarLista()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+
+
+</ion-content>

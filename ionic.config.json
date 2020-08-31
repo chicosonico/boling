@@ -1,0 +1,7 @@
+{
+  "name": "boling",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
