@@ -37,16 +37,16 @@ export class AgregarPage implements OnInit {
   }
 
   cambioCheck( item: ListaItem ){
-      
+
 
        const pendientes = this.lista.items
                           .filter( itemData => !itemData.completado)
                           .length;
 
-      console.log({pendientes});
+       console.log({pendientes});
 
-      if ( pendientes === 0){
-        this.lista.terminadaEn = new Date;
+       if ( pendientes === 0){
+        this.lista.terminadaEn = new Date();
         this.lista.terminada = true;
       }else{
         this.lista.terminadaEn = null;
@@ -57,8 +57,14 @@ export class AgregarPage implements OnInit {
        this.bolosService.guardarStorage();
 
        console.log(this.bolosService.listas);
-       
-       
+
+
+  }
+
+  borrar( i: number ){
+    this.lista.items.splice( i, 1);
+    this.bolosService.guardarStorage();
+
   }
 
 }

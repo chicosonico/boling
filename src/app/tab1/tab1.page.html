@@ -8,19 +8,25 @@
 
 <ion-content [fullscreen]="true"        
               color="dark">
+
+
   <ion-header collapse="condense" class="ion-no-border">
     <ion-toolbar color="dark">
       <ion-title size="large">Pendientes</ion-title>
     </ion-toolbar>
   </ion-header>
+
   <ion-list color="dark">
     <ion-item *ngFor= "let lista of bolosService.listas"
                detail
-               color="dark">
+               color="dark"
+               (click)= "listaSeleccionada( lista )">
       <ion-label>{{lista.titulo}}</ion-label>
+      <ion-note color="tertiary" slot="end"> {{ lista.items.length }} items</ion-note>
     </ion-item> 
    
   </ion-list>
+  
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button color="tertiary"
