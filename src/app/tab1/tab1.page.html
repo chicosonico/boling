@@ -16,7 +16,9 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-list color="dark">
+  <app-listas [terminada]="false"></app-listas>
+
+  <!-- <ion-list color="dark">
     <ion-item *ngFor= "let lista of bolosService.listas"
                detail
                color="dark"
@@ -24,8 +26,8 @@
       <ion-label>{{lista.titulo}}</ion-label>
       <ion-note color="tertiary" slot="end"> {{ lista.items.length }} items</ion-note>
     </ion-item> 
-   
-  </ion-list>
+    
+  </ion-list> -->
   
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
