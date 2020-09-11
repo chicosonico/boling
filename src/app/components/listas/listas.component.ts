@@ -1,7 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { BolosService } from '../../services/bolos.service';
 import { Router } from '@angular/router';
 import { Lista } from '../../models/lista.model';
+import { AlertController, IonList } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-listas',
@@ -10,10 +12,12 @@ import { Lista } from '../../models/lista.model';
 })
 export class ListasComponent implements OnInit {
 
+  @ViewChild( IonList) lista: IonList;
   @Input() terminada = true;
 
   constructor(public bolosService: BolosService,
-              private router: Router) { }
+              private router: Router,
+              private alertCtrl: AlertController) { }
 
   ngOnInit() {}
 
@@ -29,6 +33,48 @@ export class ListasComponent implements OnInit {
 
   borrarLista( lista: Lista ){
     this.bolosService.borrarLista (lista);
+  }
+
+  async editarLista( lista: Lista){
+
+    const alert = await this.alertCtrl.create({
+      cssClass: 'my-custom-class',
+      header: 'Editar Nombre',
+      inputs: [
+        { name: 'titulo',
+        type: 'text',
+        value: lista.titulo,
+        placeholder: 'nombre de la lista'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            console.log('cancelado');
+            this.lista.closeSlidingItems();
+
+
+          }
+        },
+        {
+          text: 'Actualizar',
+          handler: ( data ) => {
+            console.log(data);
+            if (data.titulo.length === 0){
+              return;
+            }
+            lista.titulo = data.titulo;
+            this.bolosService.guardarStorage();
+            this.lista.closeSlidingItems();
+          }
+        }
+      ]
+    });
+
+    alert.present();
+
   }
 
 }
